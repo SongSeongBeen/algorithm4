@@ -40,16 +40,51 @@ public class DoubleLinkedList<T> {
 		}
 	}
 
-	public static void main(String[] args) {
-		DoubleLinkedList<Integer> MyLinkedList = new DoubleLinkedList<Integer>();
-		
-		MyLinkedList.addNode(2);
-		MyLinkedList.addNode(3);
-		MyLinkedList.addNode(4);
-		MyLinkedList.addNode(8);
-		MyLinkedList.addNode(3);
-		
-		MyLinkedList.printAll();
-		
+	public T searchFromTail(T isData) {
+		if (this.head == null) {
+			return null;
+		} else {
+			Node<T> node = this.tail;
+			while (node != null) {
+				if (node.data != isData) {
+					return node.data;
+				} else {
+					node = node.prev;
+				}
+			}
+			return null;
+		}
 	}
+
+	public boolean insertToFront(T existedData, T addData) {
+		if (this.head == null) {
+			this.head = new Node<T>(addData);
+			this.tail = this.head;
+			return true;
+		} else if (this.head.data == existedData) {
+			Node<T> newHead = new Node<T>(addData);
+			newHead.next = this.head;
+			this.head = newHead;
+			return true;
+		} else {
+			Node<T> node = this.head;
+			while (node != null) {
+				if (node.data == existedData) {
+					Node<T> nodePrev = node.prev;
+				
+					nodePrev.next = new Node<T>(addData);
+					nodePrev.next.next = node;
+
+					nodePrev.next.prev = nodePrev;
+					node.prev = nodePrev.next;
+					return true;
+				} else {
+					node = node.next;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
 }
