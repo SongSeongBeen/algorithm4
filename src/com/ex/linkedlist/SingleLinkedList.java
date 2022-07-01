@@ -103,5 +103,6 @@ public class SingleLinkedList<T> {
 		MyLinkedList.delNode(21);
 		MyLinkedList.printAll();
 	}
-
+ 
+	
 }
